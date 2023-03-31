@@ -3,6 +3,7 @@ package com.cui.maven.fileStream;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class FileStreamReaderTest {
     /**
@@ -120,7 +121,6 @@ public class FileStreamReaderTest {
     /**复制图片
      *
      */
-
     @Test
     public void test4(){
 
@@ -159,5 +159,48 @@ public class FileStreamReaderTest {
             }
         }
 
+    }
+
+    /**复制文本
+     *
+     */
+    @Test
+    public void test5(){
+
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+
+        try {
+            File file = new File("hello1.txt");
+            File file1 = new File("hello1_copy.txt");
+
+            fis = new FileInputStream(file);
+            fos = new FileOutputStream(file1);
+
+            int len;
+            byte[] bytes = new byte[8];
+            while ((len = fis.read(bytes)) != -1) {
+                fos.write(bytes,0,len);
+                System.out.println(Arrays.toString(bytes));
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (fos != null){
+                    fos.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                if (fis != null){
+                    fis.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
