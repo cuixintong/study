@@ -1,4 +1,4 @@
-package com.cui.maven.reflextion;
+package com.cui.maven.reflection;
 
 import org.junit.Test;
 
@@ -48,5 +48,24 @@ public class ReflectionTest {//反射可以调用私有属性，和私有方法�
         person.setAge(12);
         String invoke = (String) toString.invoke(person);
         System.out.println(invoke);
+    }
+
+    /**
+     * 获取Class实例的几种方式
+     * 都是同一个类对象，不同的加载方式*/
+    @Test
+    public void test3() throws ClassNotFoundException {
+        //1.
+        Class<Person> personClass = Person.class;
+
+        //2.
+        Person person = new Person();
+        Class<? extends Person> aClass = person.getClass();
+
+        //3.
+        Class<?> aClass1 = Class.forName("com.cui.maven.reflection.Person");//包含包路径在内的类名叫做全类名
+
+        //4.
+        Class<?> aClass2 = ClassLoader.getSystemClassLoader().loadClass("com.cui.maven.reflection.Person");
     }
 }

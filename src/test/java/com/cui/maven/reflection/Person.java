@@ -1,4 +1,4 @@
-package com.cui.maven.reflextion;
+package com.cui.maven.reflection;
 
 import java.io.Serializable;
 import java.util.Objects;
